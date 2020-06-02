@@ -63,4 +63,30 @@ public class SpecialiteService implements ISpecialite {
         }
         return specialite;
     }
+
+    @Override
+    public void update(Specialite specialite) {
+        try {
+            DatabaseHelper db = new DatabaseHelper();
+            String sql = "UPDATE specialite set libelle = ? WHERE id = ?";
+            Object[] params = {specialite.getLibelle(), specialite.getId()};
+            db.myPreparedStatement(sql, params);
+            db.myExecuteUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void delete(int specialite_id) {
+        try {
+            DatabaseHelper db = new DatabaseHelper();
+            String sql = "DELETE FROM specialite WHERE id = ?";
+            Object[] params = {specialite_id};
+            db.myPreparedStatement(sql, params);
+            db.myExecuteUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
